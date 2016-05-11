@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<div class="input">
+			<form>
+
+				Artist: <input type="text" name="artist" id="artist" class="inputfield"> 
+				Rows: <input type="number" name="rows" id="rows" class="inputfield">
+				Columns: <input type="number" name="columns" id="columns" class="inputfield">
+
+				<input id="button" type="button" value="Make" />
+			</form>
+		</div>
+		<script>
+			$("#button").click(function(event) {
+				event.preventDefault();
+				$.ajax({
+					url: "/cgi-bin/mypython.py",
+					type: "post",
+					datatype:"json",
+					data: {'artists': $("#artist").val(),'rows':$("#rows").val(), 'columns': $("#columns").val()},
+					success: function(response){
+						console.log(response);
+					},
+					error: function(response) {
+						console.log(response);
+					}
+				});
+			});	
+		</script> 	
+	</body>
+</html>
+
